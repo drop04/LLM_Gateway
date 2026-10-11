@@ -1,0 +1,27 @@
+{
+  "port": 8080,
+  "adminKey": "env:GATEWAY_ADMIN_KEY",
+  "dbPath": "./gateway.db",
+
+  "providers": {
+    "openai":    { "type": "openai",    "baseUrl": "https://api.openai.com/v1",    "apiKey": "env:OPENAI_API_KEY" },
+    "anthropic": { "type": "anthropic", "baseUrl": "https://api.anthropic.com",    "apiKey": "env:ANTHROPIC_API_KEY" }
+  },
+
+  "models": {
+    "fast":  { "routes": [ { "provider": "openai",    "model": "gpt-4o-mini" },
+                           { "provider": "anthropic", "model": "claude-haiku-4-5" } ] },
+    "smart": { "routes": [ { "provider": "anthropic", "model": "claude-sonnet-4-5" },
+                           { "provider": "openai",    "model": "gpt-4.1" } ] }
+  },
+
+  "_pricing_note": "USD per 1M tokens. EXAMPLE VALUES - check each provider's pricing page and keep this current.",
+  "pricing": {
+    "openai/gpt-4o-mini":          { "input": 0.15, "output": 0.60, "cacheRead": 0.075 },
+    "openai/gpt-4.1":              { "input": 2.00, "output": 8.00, "cacheRead": 0.50 },
+    "anthropic/claude-haiku-4-5":  { "input": 1.00, "output": 5.00, "cacheRead": 0.10, "cacheWrite": 1.25 },
+    "anthropic/claude-sonnet-4-5": { "input": 3.00, "output": 15.00, "cacheRead": 0.30, "cacheWrite": 3.75 }
+  },
+
+  "cache": { "enabled": true, "scope": "key", "threshold": 0.92, "ttlSeconds": 3600 }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "llm-gateway",
+  "version": "0.1.0",
+  "description": "OpenAI-compatible LLM gateway: per-key budgets, fallback routing, semantic cache, SSE passthrough, token-level billing",
+  "type": "module",
+  "engines": { "node": ">=22.13" },
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning src/index.js",
+    "test": "node --disable-warning=ExperimentalWarning --test test/*.test.js"
+  }
+}
